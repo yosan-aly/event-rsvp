@@ -85,7 +85,7 @@ export function ConfirmForm({ current, onSaved }: Props) {
         value={name}
         onChange={(e) => setName(e.target.value)}
         disabled={saving}
-        placeholder="Ej. Sanly Ortiz"
+        placeholder="Ej. Nombre Apellido"
         className="mt-1 w-full rounded-xl border bg-background px-4 py-3 text-base outline-none focus:border-primary focus:ring-2 focus:ring-primary/25 disabled:opacity-60"
       />
 
