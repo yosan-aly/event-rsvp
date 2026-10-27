@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/* Paleta de la boda: verde #6B7D48 (principal) y rosa #D37675 (títulos y detalles) */
+@theme {
+  --color-background: #fcfbf3; /* el fondo crema de la ilustración */
+  --color-foreground: #4a3f3a;
+  --color-card: #fffdf8;
+  --color-primary: #6b7d48;
+  --color-primary-foreground: #ffffff;
+  --color-rose: #d37675;
+  --color-rose-dark: #a24f4e; /* rosa con contraste suficiente para texto pequeño */
+  --color-muted: #f6efe6;
+  --color-muted-foreground: #7a6d66;
+  --color-accent: #f8e6e4;
+  --color-accent-foreground: #9e4a49;
+  --color-border: #eadfd3;
+  --color-gold: #c9a24a;
+  --color-danger: #c0392b;
+  --font-script: "Great Vibes", "Brush Script MT", cursive;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Nunito", system-ui, sans-serif;
+  --shadow-soft: 0 10px 30px -14px color-mix(in oklab, var(--color-primary) 40%, transparent);
+}
+
+@layer base {
+  *, ::before, ::after { border-color: var(--color-border); }
+}
+
+html { scroll-behavior: smooth; }
+body { @apply bg-background text-foreground font-sans antialiased; }
