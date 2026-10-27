@@ -25,6 +25,8 @@ export const eventInfo = {
   giftNote: {
     title: "Lluvia de sobres",
     text: "Tu presencia es nuestro mejor regalo, pero si deseas hacernos un obsequio, agradecemos sea en sobre.",
+    /** Alternativa al sobre físico: transferencia */
+    transfer: { method: "Nequi", account: "301 637 2200" },
   },
   intro: "Por favor confírmanos tu asistencia para preparar todo con mucho cariño.",
   // Solo informativa: se aceptan confirmaciones después de esta fecha

@@ -1,4 +1,5 @@
-import { Church, Heart, Mail, PartyPopper, type LucideIcon } from "lucide-react";
+import { useState } from "react";
+import { Check, Church, Copy, Heart, Mail, PartyPopper, type LucideIcon } from "lucide-react";
 import { eventInfo } from "@/data/event";
 
 const icons: Record<(typeof eventInfo.schedule)[number]["icon"], LucideIcon> = {
@@ -42,6 +43,42 @@ export function GiftNote() {
         {eventInfo.giftNote.title}
       </h2>
       <p className="mt-1 text-sm">{eventInfo.giftNote.text}</p>
+      <TransferInfo {...eventInfo.giftNote.transfer} />
     </section>
+  );
+}
+
+/** Datos para enviar el obsequio por transferencia, con botón para copiar el número. */
+function TransferInfo({ method, account }: { method: string; account: string }) {
+  const [copied, setCopied] = useState(false);
+
+  async function copy() {
+    try {
+      // Sin espacios, como lo piden las apps de pago
+      await navigator.clipboard.writeText(account.replace(/\s/g, ""));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Navegador sin permiso de portapapeles: el número sigue visible para copiarlo a mano
+    }
+  }
+
+  return (
+    <div className="mt-4 border-t border-rose/20 pt-4">
+      <p className="text-sm text-muted-foreground">También puedes enviarlo por {method}:</p>
+      <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-rose/30 bg-card/90 py-1.5 pr-1.5 pl-4">
+        <span className="text-sm font-bold text-rose-dark">{method}</span>
+        <span className="font-display text-xl font-semibold tracking-wide">{account}</span>
+        <button
+          type="button"
+          onClick={copy}
+          aria-label={`Copiar número de ${method}`}
+          className="inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-primary-foreground"
+        >
+          {copied ? <Check className="h-3.5 w-3.5" aria-hidden /> : <Copy className="h-3.5 w-3.5" aria-hidden />}
+          {copied ? "Copiado" : "Copiar"}
+        </button>
+      </div>
+    </div>
   );
 }
