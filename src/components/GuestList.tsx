@@ -24,6 +24,11 @@ export function GuestList({ token, onLogout }: Props) {
         onLogout("El código de acceso no es correcto.");
         return;
       }
+      if (err instanceof ApiError && err.status === 429) {
+        // Demasiados códigos incorrectos: el backend pide esperar un minuto
+        onLogout(err.message);
+        return;
+      }
       setError(err instanceof ApiError ? err.message : "No pudimos cargar la lista.");
     },
     [onLogout],
